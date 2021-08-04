@@ -16,29 +16,34 @@ from io import BytesIO
 from keras.preprocessing.image import img_to_array, load_img
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-#from werkzeug.utils import secure_filename
+# from werkzeug.utils import secure_filename
 import sys
 import os
 import glob
 import re
-#from tempfile import TemporaryDirectory
+# from tempfile import TemporaryDirectory
 import shutil
 import matplotlib.pyplot as plt
 from PIL import Image
 from skimage import io
-#import cv2
+# import cv2
+
 
 # load trained model
-MODEL_PATH ='../model/bike_class_v5.h5'
+# MODEL_PATH ='../model/bike_class_v5.h5'
+MODEL_PATH ='/bike_app/model/bike_class_v5.h5'
 model = load_model(MODEL_PATH)
+
 
 # set target size
 final_size = 290
+
 
 app = FastAPI(
     title = "Bike Identification",
     description = "Implementación del Modelo de Identificación de Bicicletas para HDI Chile",
     version = "1.0.0")
+
 
 # index
 @app.get("/")
@@ -100,9 +105,9 @@ def predict_image(image_file: UploadFile = File(...)):
             #'pixel mean tf_load':float(x.mean()),
             'Class predict':float(classes[0]),
             'Probability':float(prob),
-            'Classifier': clasif} 
+            'Classifier': clasif}
 
 
-#Run the API with uvicorn api_bike:app --reload
+# Run the API with uvicorn api_bike:app --reload
 if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='0.0.0.0', port=8500)

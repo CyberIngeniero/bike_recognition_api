@@ -10,8 +10,6 @@ COPY ./model ./model
 
 COPY ./app ./app
 
-# EXPOSE 8000
+EXPOSE 8000
 
-# CMD ["python", "./app/main.py"]
-
-CMD uvicorn --port $PORT --host 0.0.0.0 main:app --reload
+CMD ["python", "./app/main.py"]
